@@ -1,12 +1,19 @@
-import { IsDecimal, IsString } from 'class-validator';
+import { IsArray, IsDecimal, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsDecimal()
+  @IsNotEmpty()
   quantity: number;
 
   @IsDecimal()
+  @IsNotEmpty()
   price: number;
+
+  @IsArray()
+  @IsNotEmpty()
+  tags: string[];
 }

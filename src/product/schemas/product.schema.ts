@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { Tag } from './../../tag/schemas';
 
 export type ProductDocument = Product & Document;
 
@@ -13,6 +14,9 @@ export class Product {
 
   @Prop({ required: true })
   price: number;
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: Tag.name, autopopulate: true }] })
+  tags: Types.Array<Tag>;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

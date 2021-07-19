@@ -7,7 +7,16 @@ import { Product, ProductSchema } from './schemas';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
+    MongooseModule.forFeatureAsync([
+      {
+        name: Product.name,
+        useFactory: () => {
+          const schema = ProductSchema;
+          schema.plugin(require('mongoose-autopopulate'));
+          return schema;
+        },
+      },
+    ]),
   ],
   controllers: [ProductController],
   providers: [ProductService],
