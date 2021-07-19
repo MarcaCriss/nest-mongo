@@ -16,4 +16,8 @@ export class CreateProductDto {
   @IsArray()
   @IsNotEmpty()
   tags: string[];
+
+  @IsArray()
+  @IsNotEmpty()
+  categories: string[];
 }
